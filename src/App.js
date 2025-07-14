@@ -1,38 +1,47 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useCallback } from "react";
 import Terminal from "./components/Terminal";
+import CatShowcase from "./components/CatShowcase";
 import "./styles.css";
+
+
+import themes from "./themes";
+
+// Utility for heart color
+function getContrastingColor(hex) {
+    const c = hex.substring(1);
+    const [r, g, b] = [
+        parseInt(c.substr(0, 2), 16),
+        parseInt(c.substr(2, 2), 16),
+        parseInt(c.substr(4, 2), 16),
+    ];
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5 ? "#000" : "#fff";
+}
 
 function App() {
     const [catCount, setCatCount] = useState(1);
     const maxCats = 5;
-    const [pawPrints, setPawPrints] = useState([]);
+
+    // Cat click handler for hearts animation
+    const handleCatClick = useCallback(() => {
+        const theme = themes.kimbie; // Or use your current theme if you pass it down
+        const heartCount = Math.floor(Math.random() * 3) + 2;
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.textContent = "❤️";
+            heart.style.left = `${Math.random() * 80 + 10}%`;
+            heart.style.top = "90%";
+            heart.style.color = getContrastingColor(theme.fg || "#ff69b4");
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000 + i * 300);
+        }
+    }, []);
 
     const handleCatCountChange = (e) => {
         const count = Math.min(maxCats, Math.max(1, Number(e.target.value)));
         setCatCount(count);
     };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setPawPrints((prev) => [
-                ...prev,
-                ...Array.from({ length: catCount }, (_, i) => ({
-                    id: Date.now() + i,
-                    left: Math.random() * 100,
-                    top: Math.random() * 100,
-                }))
-            ]);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, [catCount]);
-
-    useEffect(() => {
-        const cleanup = setInterval(() => {
-            setPawPrints((prev) => prev.slice(-50));
-        }, 5000);
-        return () => clearInterval(cleanup);
-    }, []);
 
     return (
         <div className="app-container">
@@ -40,21 +49,16 @@ function App() {
                 <Terminal />
                 <div className="cat-control">
                     <label htmlFor="catCount">Cats:</label>
-                    <input id="catCount"
+                    <input
+                        id="catCount"
                         type="number"
                         min="1"
                         max={maxCats}
                         value={catCount}
-                        onChange={handleCatCountChange} />
+                        onChange={handleCatCountChange}
+                    />
                 </div>
-                {[...Array(catCount)].map((_, i) => (
-                    <div key={i} className="cat-animation" style={{ animationDelay: `${i * 3}s` }} />
-                ))}
-                {pawPrints.map((print) => (
-                    <div key={print.id}
-                        className="paw-print"
-                        style={{ left: `${print.left}%`, top: `${print.top}%` }} />
-                ))}
+                <CatShowcase catCount={catCount} onCatClick={handleCatClick} />
             </div>
             <div className="sidebar">
                 <img src="/profile.jpg" alt="Profile" className="profile-pic" />
