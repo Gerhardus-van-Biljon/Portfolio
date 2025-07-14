@@ -25,7 +25,7 @@ function Terminal({ themeName = "kimbie" }) {
         const cmd = cmdRaw.trim().toLowerCase();
         if (!cmd) return;
 
-        setOutput((prev) => [...prev, `$dfg ${cmd}`]);
+        setOutput((prev) => [...prev, `$ ${cmd}`]);
 
         setHistory((h) => {
             const newHistory = [...h, cmd];
