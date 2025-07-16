@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 
 /**
- * Displays text with a typing animation.
+ * Displays text with a typing animation. Forwards ref for position tracking.
  */
-function TypeLine({ text }) {
+const TypeLine = forwardRef(({ text }, ref) => {
     const [displayed, setDisplayed] = useState("");
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function TypeLine({ text }) {
         return () => clearInterval(interval);
     }, [text]);
 
-    return <div className="type-line">{displayed}</div>;
-}
+    return <div ref={ref} className={`type-line ${text.includes("Error") ? "glitch" : ""}`}>{displayed}</div>;
+});
 
 export default TypeLine;

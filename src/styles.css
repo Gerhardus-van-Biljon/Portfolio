@@ -1,256 +1,275 @@
-/* ========== Root Variables ========== */
+/* ========== Root Theme Variables ========== */
 :root {
-    --prompt-color: #dc3958;
-    --input-color: #f0a500;
-    --output-color: #a1c181;
-    --background-color: #221a0f;
+  --prompt-color: #dc3958;
+  --input-color: #f0a500;
+  --output-color: #a1c181;
+  --background-color: #221a0f;
+}
+
+/* ========== Theme-Specific Cat Colors ========== */
+.normal-theme {
+  --cat-outline: #222222;
+  --cat-belly: #f5f5f5;
+  --cat-fur1: #a9a9a9;
+  --cat-fur2: #c0c0c0;
+  --cat-ear: #444444;
+}
+.matrix-theme {
+  --cat-outline: #003300;
+  --cat-belly: #99ff99;
+  --cat-fur1: #33ff33;
+  --cat-fur2: #00cc66;
+  --cat-ear: #006622;
+}
+.kimbie-theme {
+  --cat-outline: #3a1a0f;
+  --cat-belly: #ffe4b3;
+  --cat-fur1: #f0a500;
+  --cat-fur2: #a1c181;
+  --cat-ear: #7a3c2a;
+}
+.solarized-theme {
+  --cat-outline: #073642;
+  --cat-belly: #fdf6e3;
+  --cat-fur1: #93a1a1;
+  --cat-fur2: #b58900;
+  --cat-ear: #586e75;
+}
+.abyss-theme {
+  --cat-outline: #003344;
+  --cat-belly: #8be9fd;
+  --cat-fur1: #80cbc4;
+  --cat-fur2: #4f8eaa;
+  --cat-ear: #2c485a;
+}
+.candy-theme {
+  --cat-outline: #a0005a;
+  --cat-belly: #ffe4f0;
+  --cat-fur1: #ff69b4;
+  --cat-fur2: #db7093;
+  --cat-ear: #7a2f4d;
+}
+.chocolate-theme {
+  --cat-outline: #3e1f0d;
+  --cat-belly: #f4e2d0;
+  --cat-fur1: #f4a460;
+  --cat-fur2: #d2691e;
+  --cat-ear: #7a3c1a;
 }
 
 /* ========== Layout Containers ========== */
+body {
+  margin: 0;
+  height: 100%;
+  font-family: monospace;
+}
 .app-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
-
 .terminal-wrapper {
-    flex: 3;
-    animation: slideIn 0.6s ease-out;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
-
 .sidebar {
-    flex: 1;
-    background: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    animation: fadeIn 1.5s ease-in;
+  flex: 1;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 1.5s ease-in;
 }
 
 /* ========== Terminal Styles ========== */
-body, .terminal {
-    height: 100%;
-    margin: 0;
-    font-family: monospace;
-}
-
 .terminal {
-    background-color: var(--background-color);
-    color: var(--prompt-color);
-    padding: 20px;
-    font-family: monospace;
-    height: 100%;
-    overflow-y: auto;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  min-height: 0;
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: var(--prompt-color) var(--background-color);
+}
+.terminal::-webkit-scrollbar {
+  width: 10px;
+}
+.terminal::-webkit-scrollbar-thumb {
+  background: var(--prompt-color);
+  border-radius: 6px;
+}
+.terminal::-webkit-scrollbar-track {
+  background: var(--background-color);
 }
 
+/* ========== Prompt, Input, and Output Colors ========== */
 .prompt {
-    color: var(--prompt-color);
+  color: var(--prompt-color);
+  margin-right: 8px;
 }
-
 .input-text {
-    color: var(--input-color);
+  color: var(--input-color);
 }
-
 .output-text {
-    color: var(--output-color);
+  color: var(--output-color);
 }
 
-
-
-/* ========== Input Line & Prompt ========== */
+/* ========== Input Line ========== */
 .input-line {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-
-.prompt {
-    margin-right: 8px;
-}
-
-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: inherit;
-    font: inherit;
-}
-
 .input-wrapper {
-    display: inline-block;
-    position: relative;
-    min-width: 1ch;
+  display: inline-block;
+  position: relative;
+  min-width: 1ch;
 }
-
+input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+}
 .ghost-input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* ========== Cursor & Typing Animation ========== */
+/* ========== Cursor & Typing Effects ========== */
 .cursor {
-    display: inline-block;
-    width: 0.7ch;
-    height: 1em;
-    background-color: currentColor;
-    animation: blink 1s step-end infinite;
-    margin-left: 1px;
+  display: inline-block;
+  width: 0.7ch;
+  height: 1em;
+  background-color: currentColor;
+  animation: blink 1s step-end infinite;
+  margin-left: 1px;
 }
-
-
-/* ========== Profile & Sidebar ========== */
-.profile-pic {
-    max-width: 100%;
-    border-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-/* ========== Cat Animation & Paw Prints ========== */
-.terminal {
-    overflow-y: auto;
-    user-select: none;
-    position: relative;
-}
-
-.cat-animation {
-    /* size and mask handled inline for dynamic theme color */
-    pointer-events: auto;
-}
-
-
-.paw-print {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: var(--cat-color, #fff);
-    mask: url('./assets/paw.svg') no-repeat center / contain;
-    -webkit-mask: url('./assets/paw.svg') no-repeat center / contain;
-    opacity: 0.8;
-    animation: fadePaw 6s linear forwards;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* ========== Floating Effects ========== */
-.heart, .purrr {
-    position: fixed;
-    font-size: 2rem;
-    animation: floatUp 2.2s ease-out;
-    pointer-events: none;
-    z-index: 100;
-    transform: translate(-50%, 0);
-}
-
-.purrr {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: rgba(0,0,0,0.3);
-    padding: 0.3em 0.7em;
-    border-radius: 0.5em;
-}
-
-/* ========== Animations ========== */
-@keyframes floatUp {
-    0% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(-50%, -120px);
-        opacity: 0;
-    }
-}
-
-@keyframes fadePaw {
-    from {
-        opacity: 0.8;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes moveCat {
-    0% {
-        top: 0;
-        left: 0;
-        transform: scaleX(1);
-    }
-
-    25% {
-        top: 0;
-        left: 100%;
-        transform: scaleX(-1);
-    }
-
-    50% {
-        top: 100%;
-        left: 100%;
-        transform: scaleX(1);
-    }
-
-    75% {
-        top: 100%;
-        left: 0;
-        transform: scaleX(-1);
-    }
-
-    100% {
-        top: 0;
-        left: 0;
-        transform: scaleX(1);
-    }
-}
-
 @keyframes blink {
-    50% {
-        opacity: 0;
-    }
+  50% { opacity: 0; }
 }
 
+/* ========== Output & Glitch Effects ========== */
+.error-line {
+  font-weight: bold;
+  animation: glitch 0.4s step-end infinite;
+  text-shadow: 1px 0 red, -1px 0 blue;
+}
 @keyframes glitch {
-    0%,20%,40%,60%,80%,100% {
-        text-shadow: 2px 0 red, -2px 0 blue;
-    }
+  0%, 20%, 40%, 60%, 80%, 100% {
+    text-shadow: 2px 0 red, -2px 0 blue;
+  }
 }
 
+/* ========== Anchor Styling ========== */
+a {
+  color: var(--output-color);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--prompt-color);
+  text-decoration: none;
+}
+
+/* ========== Cat Art & Animation ========== */
+.pixel-cat {
+  position: absolute;
+  display: grid;
+}
+.grid-cols-64 {
+  grid-template-columns: repeat(64, 5px);
+}
+.cat-animation {
+  pointer-events: auto;
+}
+.cat-idle {
+  animation: catIdleAnim 2.5s infinite;
+}
+.cat-climb {
+  animation: catClimbAnim 1.2s forwards;
+}
+.cat-slide {
+  animation: catSlideAnim 1.2s forwards;
+}
+@keyframes catIdleAnim {
+  0% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.05) rotate(2deg); }
+  100% { transform: scale(1) rotate(-2deg); }
+}
+@keyframes catClimbAnim {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-60px); }
+}
+@keyframes catSlideAnim {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(60px); }
+}
+
+/* ========== Paw Print Animation ========== */
+.paw-print {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--cat-color, #fff);
+  mask: url('./assets/paw.svg') no-repeat center / contain;
+  -webkit-mask: url('./assets/paw.svg') no-repeat center / contain;
+  opacity: 0.8;
+  animation: fadePaw 6s linear forwards;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.5s ease-out;
+}
+@keyframes fadePaw {
+  from { opacity: 0.8; }
+  to { opacity: 0; }
+}
+
+/* ========== Floating Heart & Purr Effects ========== */
+.heart, .purrr {
+  position: fixed;
+  font-size: 2rem;
+  animation: float-up 2.2s ease-out;
+  pointer-events: none;
+  z-index: 100;
+  transform: translate(-50%, 0);
+}
+.purrr {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.3em 0.7em;
+  border-radius: 0.5em;
+}
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+}
+
+/* ========== Cat World Travel (Optional Path) ========== */
+@keyframes moveCat {
+  0%   { top: 0; left: 0; transform: scaleX(1); }
+  25%  { top: 0; left: 100%; transform: scaleX(-1); }
+  50%  { top: 100%; left: 100%; transform: scaleX(1); }
+  75%  { top: 100%; left: 0; transform: scaleX(-1); }
+  100% { top: 0; left: 0; transform: scaleX(1); }
+}
+
+/* ========== General Transitions & Effects ========== */
 @keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
 }
-
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
-
-/* ========== Responsive Design ========== */
-@media (max-width: 600px) {
-    .app-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        order: -1;
-        padding: 0.5rem;
-    }
+@keyframes fade-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-10px); opacity: 0;  }
 }

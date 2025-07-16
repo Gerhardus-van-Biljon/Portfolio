@@ -1,5 +1,7 @@
 import React from "react";
 
+
+/* ========== InputLine Component ========== */
 /**
  * Input line component with prompt, input text, and blinking cursor.
  * Uses forwarded ref for input focus management.
@@ -7,7 +9,9 @@ import React from "react";
 const InputLine = React.forwardRef(({ input, setInput, handleKey, style }, ref) => {
     return (
         <div className="input-line">
-            <span className="prompt">$</span>
+            <label htmlFor="cli-input">
+                <span className="prompt" aria-hidden="true">Terminal C:/Users/Gerhardus&gt;</span>
+            </label>
             <span className="input-wrapper">
                 {input}
                 <span className="cursor" />
@@ -22,7 +26,7 @@ const InputLine = React.forwardRef(({ input, setInput, handleKey, style }, ref) 
                     autoComplete="off"
                     spellCheck={false}
                 />
-            </span>
+            </span>        
         </div>
     );
 });
