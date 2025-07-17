@@ -4,58 +4,15 @@
   --input-color: #f0a500;
   --output-color: #a1c181;
   --background-color: #221a0f;
+--cat-outline: #000;
+  --cat-belly: #f2d9c1;
+  --cat-fur1: #d3926f;
+  --cat-fur2: #a8724f;
+  --cat-ear: #fbb;
 }
 
 /* ========== Theme-Specific Cat Colors ========== */
-.normal-theme {
-  --cat-outline: #222222;
-  --cat-belly: #f5f5f5;
-  --cat-fur1: #a9a9a9;
-  --cat-fur2: #c0c0c0;
-  --cat-ear: #444444;
-}
-.matrix-theme {
-  --cat-outline: #003300;
-  --cat-belly: #99ff99;
-  --cat-fur1: #33ff33;
-  --cat-fur2: #00cc66;
-  --cat-ear: #006622;
-}
-.kimbie-theme {
-  --cat-outline: #3a1a0f;
-  --cat-belly: #ffe4b3;
-  --cat-fur1: #f0a500;
-  --cat-fur2: #a1c181;
-  --cat-ear: #7a3c2a;
-}
-.solarized-theme {
-  --cat-outline: #073642;
-  --cat-belly: #fdf6e3;
-  --cat-fur1: #93a1a1;
-  --cat-fur2: #b58900;
-  --cat-ear: #586e75;
-}
-.abyss-theme {
-  --cat-outline: #003344;
-  --cat-belly: #8be9fd;
-  --cat-fur1: #80cbc4;
-  --cat-fur2: #4f8eaa;
-  --cat-ear: #2c485a;
-}
-.candy-theme {
-  --cat-outline: #a0005a;
-  --cat-belly: #ffe4f0;
-  --cat-fur1: #ff69b4;
-  --cat-fur2: #db7093;
-  --cat-ear: #7a2f4d;
-}
-.chocolate-theme {
-  --cat-outline: #3e1f0d;
-  --cat-belly: #f4e2d0;
-  --cat-fur1: #f4a460;
-  --cat-fur2: #d2691e;
-  --cat-ear: #7a3c1a;
-}
+
 
 /* ========== Layout Containers ========== */
 body {
@@ -179,15 +136,31 @@ a:hover {
 
 /* ========== Cat Art & Animation ========== */
 .pixel-cat {
-  position: absolute;
   display: grid;
+  grid-template-columns: repeat(64, 5px);
+  width: 320px; /* 64 × 5px */
+  height: 320px;
 }
+
 .grid-cols-64 {
   grid-template-columns: repeat(64, 5px);
 }
 .cat-animation {
-  pointer-events: auto;
+  top: calc(100vh - 150px);
 }
+
+@media (max-width: 768px) {
+  .cat-animation {
+    top: calc(100vh - 90px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-animation {
+    top: calc(100vh - 60px);
+  }
+}
+
 .cat-idle {
   animation: catIdleAnim 2.5s infinite;
 }

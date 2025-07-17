@@ -2,26 +2,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import useCatInteraction from "../hooks/useCatInteraction";
 import useCatMovement from "../hooks/useCatMovement";
-import { frameSets, poseMap } from "../poses";
+import { catPoses } from "../poses/sitPose";
 import HeartAnimation from "./HeartAnimation";
-import CatArt from "./CatArt";
+import CatArt from "./PixelCatArt";
 
 /* ========== CatShowcase Component ========== */
-export default function CatShowcase({ catCount, onCatClick, lineRefs = [], theme }) {
+export default function CatShowcase({ catCount, onCatClick, theme }) {
   /* ========== Refs & State ========== */
   const catRefs = useRef([]);
   const [pawPrints, setPawPrints] = useState([]);
-  const [walkIndex, setWalkIndex] = useState(0);
-
+  const [poseIndex, setPoseIndex] = useState(0);
+    
   /* ========== Hooks ========== */
   const { heartPos, handleCatClick, clearHeart } = useCatInteraction();
   const { cats, moveCat } = useCatMovement(catCount);
 
-  /* ========== Walking Frame Timer ========== */
+  /* ========== Pose Cycling ========== */
   useEffect(() => {
+    const frameKeys = Object.keys(catPoses.sitting);
     const interval = setInterval(() => {
-      setWalkIndex(i => (i + 1) % frameSets.walkLeft.length);
-    }, 200);
+      setPoseIndex(i => (i + 1) % frameKeys.length);
+    }, 600); // adjust speed if needed
     return () => clearInterval(interval);
   }, []);
 
@@ -66,11 +67,16 @@ export default function CatShowcase({ catCount, onCatClick, lineRefs = [], theme
     <>
       {/* 🐾 Render Each Cat */}
       {cats.map((cat, i) => {
-        const poseMatrix = cat.isMoving
-          ? (cat.direction === "right" ? frameSets.walkRight[walkIndex] : frameSets.walkLeft[walkIndex])
-          : poseMap[cat.mood] || poseMap.sit;
+        const frameKeys = Object.keys(catPoses.sitting);
+        const currentPoseName = frameKeys[poseIndex] || "sit1";
+        const currentPose = catPoses.sitting[currentPoseName];
 
         return (
+            <div
+  className="pixel-cat inline-block border-2 border-border rounded-lg p-4"
+  style={{ backgroundColor: "var(--bg)" }}
+>
+
           <div
             key={cat.id ?? i}
             ref={el => { catRefs.current[i] = el; }}
@@ -88,15 +94,17 @@ export default function CatShowcase({ catCount, onCatClick, lineRefs = [], theme
             }}
             style={{
               animationDelay: `${i * 3}s`,
+              top: `calc(100vh - 85px)`,
               left: cat.left,
-              top: cat.top,
               position: "fixed",
               width: 48,
               height: 48,
-              pointerEvents: "auto"
+  pointerEvents: "auto"
             }}
           >
-            <CatArt pose={cat.mood || "sit"} theme={`${theme.name}-theme`} blink={!cat.isMoving} />
+            <CatArt pose={currentPose} theme={theme} />
+
+          </div>
           </div>
         );
       })}
