@@ -12,8 +12,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./types",
+"emitDeclarationOnly": true,
+"outDir": "./types"
+,
     "jsx": "react-jsx",
 
     /* Linting */
