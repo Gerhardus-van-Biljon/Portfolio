@@ -1,0 +1,81 @@
+declare const themes: {
+    matrix: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+    kimbie: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+    dracula: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+    abyss: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+    normal: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+    chocolate: {
+        bg: string;
+        fg: string;
+        inputColor: string;
+        outputColor: string;
+        promptColor: string;
+        emoji: string;
+        catOutline: string;
+        catBelly: string;
+        catFur1: string;
+        catFur2: string;
+        catEar: string;
+    };
+};
+export default themes;
