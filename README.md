@@ -1,4 +1,4 @@
-# 🐱 CatOS Terminal Portfolio
+# 🐱 CatOS T
 # **by Gerhardus van Biljon** presenting shatterd dreams
 
 ![CatOS Terminal](https://img.shields.io/badge/CatOS-v1.0.2-brightgreen)
