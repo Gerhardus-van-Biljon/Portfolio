@@ -1,6 +1,5 @@
 # 🐱 CatOS Terminal Portfolio
-A personal portfolio styled An interactive pixel art cat terminal built with React, TypeScript and Figma. Features an animated 64x64 pixel cat with ear and tail movements and interactive massages, multiple color themes, and hidden easter egg commands 🐾🍭.
-**Made with cats in mind by Gerhardus van Biljon**
+# **by Gerhardus van Biljon** presenting shatterd dreams
 
 ![CatOS Terminal](https://img.shields.io/badge/CatOS-v1.0.2-brightgreen)
 ![React](https://img.shields.io/badge/React-18+-blue)
